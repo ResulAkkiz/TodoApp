@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#82B1FF</color>
+    <color name="lowPriorityColor">#219C90</color>
+    <color name="normalPriorityColor">#E9B824</color>
+    <color name="highPriorityColor">#EE9322</color>
+    <color name="criticalPriorityColor">#D83F31</color>
+</resources>

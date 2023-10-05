@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TodoApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="unchecked_todo_title_string">Tamamlanmamış Yapılacaklar</string>
+    <string name="checked_todo_title_string">Tamamlanan Yapılacaklar</string>
+    <string name="kaydet_string">Kaydet</string>
+    <string name="priority_string">Öncelik</string>
+    <string name="kayit_sayfasi_title">Kayıt Sayfası</string>
+    <string name="detay_sayfasi_title">Detay Sayfası</string>
+    <string name="guncelle_string">Güncelle</string>
+    <string name="tamamlandi_string">Tamamlandı:</string>
+    <string name="anasayfa_title_string">Ana Sayfa</string>
+</resources>

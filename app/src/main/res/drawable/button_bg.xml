@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Button's default state -->
+    <item android:state_enabled="true">
+        <shape>
+            <solid android:color="@color/primaryColor" /> <!-- Background color -->
+            <corners android:bottomRightRadius="16dp" android:topLeftRadius="16dp"/> <!-- Rounded corners -->
+        </shape>
+    </item>
+    <!-- Button's pressed state -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/primaryColor" /> <!-- Background color when pressed -->
+            <corners android:bottomRightRadius="16dp" android:topLeftRadius="16dp"/> <!-- Rounded corners -->
+        </shape>
+    </item>
+    <!-- Button's disabled state -->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/primaryColor" /> <!-- Background color when disabled -->
+            <corners android:bottomRightRadius="16dp" android:topLeftRadius="16dp"/> <!-- Rounded corners -->
+        </shape>
+    </item>
+</selector>
