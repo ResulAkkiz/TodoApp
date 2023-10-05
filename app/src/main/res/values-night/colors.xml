@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primaryColor">#004D40</color>
-    <color name="secondaryColor">#EFEFEF</color>
+    <color name="primaryColor">#00231D</color>
+    <color name="secondaryColor">#01594E</color>
     <color name="checkColor">@color/white</color>
     <color name="lowPriorityColor">#219C90</color>
     <color name="normalPriorityColor">#E9B824</color>
