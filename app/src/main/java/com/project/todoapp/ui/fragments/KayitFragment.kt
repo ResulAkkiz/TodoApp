@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.project.todoapp.R
 import com.project.todoapp.data.entity.Priority
 import com.project.todoapp.data.entity.Todo
+import com.project.todoapp.data.entity.toPriorityFromEn
 import com.project.todoapp.data.entity.toPriorityFromTr
 import com.project.todoapp.databinding.FragmentKayitBinding
 import com.project.todoapp.ui.adapter.PrioritySpinnerAdapter
@@ -23,6 +25,7 @@ class KayitFragment : Fragment() {
     private var _binding: FragmentKayitBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: KayitFragmentViewModel
+    private val args: KayitFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -30,7 +33,8 @@ class KayitFragment : Fragment() {
         _binding = FragmentKayitBinding.inflate(inflater, container, false)
         val view = binding.root
         val priorityLevel = listOf(Priority.Critical, Priority.High, Priority.Normal, Priority.Low)
-        val spinnerAdapter = PrioritySpinnerAdapter(priorityLevel, requireContext())
+        val isEn = args.language
+        val spinnerAdapter = PrioritySpinnerAdapter(priorityLevel, requireContext(), isEn)
         binding.kayitAutoCompletePriorityTextView.setAdapter(spinnerAdapter)
 
 
@@ -43,7 +47,7 @@ class KayitFragment : Fragment() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
-                    insertTodo()
+                    insertTodo(isEn)
                     Snackbar.make(it, "Başarıyla listeye eklendi. ✅", Snackbar.LENGTH_SHORT)
                         .setAction("Listeyi Göster") { it ->
                             Navigation.findNavController(it).popBackStack()
@@ -63,14 +67,19 @@ class KayitFragment : Fragment() {
     private fun checkFields(): Boolean =
         binding.kayitAutoCompletePriorityTextView.text.isNullOrEmpty() || binding.kayitDescriptionEditText.text.isNullOrEmpty() || binding.kayitTitleEditText.text.isNullOrEmpty()
 
-    private fun insertTodo() {
+    private fun insertTodo(isEn: Boolean) {
+        val priority = if (isEn) {
+            binding.kayitAutoCompletePriorityTextView.text.toString().toPriorityFromEn()
+        } else {
+            binding.kayitAutoCompletePriorityTextView.text.toString().toPriorityFromTr()
+        }
         val insertedTodo = Todo(
             0,
             binding.kayitTitleEditText.text.toString(),
             binding.kayitDescriptionEditText.text.toString(),
             false,
-            binding.kayitAutoCompletePriorityTextView.text.toString().toPriorityFromTr()
-        )
+            priority
+            )
         viewModel.insertTodo(insertedTodo)
     }
 

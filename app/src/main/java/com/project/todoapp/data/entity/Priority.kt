@@ -13,6 +13,9 @@ enum class Priority {
             Low -> "Düşük"
         }
     }
+    fun en(): String {
+        return name
+    }
 
     fun color(): Int {
         return when (this) {
@@ -30,6 +33,16 @@ fun String.toPriorityFromTr(): Priority {
         "Yüksek" -> Priority.High
         "Normal" -> Priority.Normal
         "Düşük" -> Priority.Low
+        else -> throw IllegalArgumentException("Geçersiz öncelik: $this")
+    }
+}
+
+fun String.toPriorityFromEn(): Priority {
+    return when (this) {
+        "Critical" -> Priority.Critical
+        "High" -> Priority.High
+        "Normal" -> Priority.Normal
+        "Low" -> Priority.Low
         else -> throw IllegalArgumentException("Geçersiz öncelik: $this")
     }
 }

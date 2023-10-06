@@ -6,23 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-import com.project.todoapp.data.datasource.TodoDataSource
 import com.project.todoapp.data.entity.Priority
 import com.project.todoapp.data.entity.Todo
+import com.project.todoapp.data.entity.toPriorityFromEn
 import com.project.todoapp.data.entity.toPriorityFromTr
 import com.project.todoapp.databinding.FragmentDetayBinding
-import com.project.todoapp.room.TodoDatabase
 import com.project.todoapp.ui.adapter.PrioritySpinnerAdapter
-import com.project.todoapp.ui.viewmodels.AnasayfaFragmentViewModel
 import com.project.todoapp.ui.viewmodels.DetayFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
 @AndroidEntryPoint
 class DetayFragment : Fragment() {
@@ -37,7 +30,8 @@ class DetayFragment : Fragment() {
         _binding = FragmentDetayBinding.inflate(inflater, container, false)
         val view = binding.root
         val todo = args.Todo
-        initiliazeContent(todo)
+        val isEn = args.language
+        initiliazeContent(todo, isEn)
 
         binding.guncelleButton.setOnClickListener {
 
@@ -49,9 +43,13 @@ class DetayFragment : Fragment() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
-                    updateTodo(todo.id)
-                    Snackbar.make(it, "Güncelleme işlemi başarıyla gerçekleşti. ✅", Snackbar.LENGTH_SHORT)
-                      .show()
+                    updateTodo(todo.id,isEn)
+                    Snackbar.make(
+                        it,
+                        "Güncelleme işlemi başarıyla gerçekleşti. ✅",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .show()
                 }
 
             } catch (e: Exception) {
@@ -65,26 +63,31 @@ class DetayFragment : Fragment() {
     private fun checkFields(): Boolean =
         binding.detayTitleEditText.text.isNullOrEmpty() || binding.detayDescriptionEditText.text.isNullOrEmpty()
 
-    private fun initiliazeContent(todo: Todo) {
-        val priorityLevel = listOf(Priority.Critical, Priority.High, Priority.Normal, Priority.Low)
-        val spinnerAdapter = PrioritySpinnerAdapter(priorityLevel, requireContext())
+    private fun initiliazeContent(todo: Todo, isEn: Boolean) {
+        val priorityLevel = Priority.entries
+        val spinnerAdapter = PrioritySpinnerAdapter(priorityLevel, requireContext(), isEn)
 
         with(binding) {
             detayTitleEditText.setText(todo.title)
             detayDescriptionEditText.setText(todo.description)
-            detayAutoCompletePriorityTextView.setText(todo.priorityLevel.tr())
+            detayAutoCompletePriorityTextView.setText(if (isEn)  todo.priorityLevel.en() else  todo.priorityLevel.tr())
             detayAutoCompletePriorityTextView.setAdapter(spinnerAdapter)
             detayCheckBox.isChecked = todo.checked
         }
     }
 
-    private fun updateTodo(todoId:Int){
+    private fun updateTodo(todoId: Int, isEn: Boolean) {
+        val priority = if (isEn) {
+            binding.detayAutoCompletePriorityTextView.text.toString().toPriorityFromEn()
+        } else {
+            binding.detayAutoCompletePriorityTextView.text.toString().toPriorityFromTr()
+        }
         val updatedTodo = Todo(
             todoId,
             binding.detayTitleEditText.text.toString(),
             binding.detayDescriptionEditText.text.toString(),
             binding.detayCheckBox.isChecked,
-            binding.detayAutoCompletePriorityTextView.text.toString().toPriorityFromTr()
+            priority
         )
 
         viewModel.updateTodo(updatedTodo)

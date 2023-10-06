@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 
-
 @Entity(tableName = "todo")
 data class Todo(
     @ColumnInfo(name = "todo_id",) @PrimaryKey(autoGenerate = true) @NotNull var id: Int,

@@ -24,6 +24,7 @@ class TodoRecyclerViewAdapter(
     var mContext: Context,
     var todoList: List<Todo>,
     var viewModel: AnasayfaFragmentViewModel,
+    var language:Boolean
 ) :
     RecyclerView.Adapter<TodoRecyclerViewAdapter.TodoViewHolder>() {
 
@@ -33,7 +34,7 @@ class TodoRecyclerViewAdapter(
         fun bindView(todo: Todo) {
             view.root.setOnClickListener {
                 val direction =
-                    AnasayfaFragmentDirections.actionAnasayfaFragmentToDetayFragment(todo)
+                    AnasayfaFragmentDirections.actionAnasayfaFragmentToDetayFragment(todo,language)
                 Navigation.findNavController(it).navigate(direction)
             }
 

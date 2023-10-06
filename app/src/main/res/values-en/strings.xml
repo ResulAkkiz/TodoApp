@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TodoApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="unchecked_todo_title_string">Uncompleted Todo</string>
+    <string name="checked_todo_title_string">Completed Todo</string>
+    <string name="kaydet_string">Save</string>
+    <string name="priority_string">Priority</string>
+    <string name="kayit_sayfasi_title">Registration Page</string>
+    <string name="detay_sayfasi_title">Detail Page</string>
+    <string name="guncelle_string">Update</string>
+    <string name="tamamlandi_string">Completed:</string>
+    <string name="anasayfa_title_string">Home Page</string>
+    <string name="tanim_string">Description</string>
+    <string name="baslik_string">Title</string>
+</resources>

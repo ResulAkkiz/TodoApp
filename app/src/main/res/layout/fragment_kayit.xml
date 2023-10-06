@@ -59,7 +59,7 @@
                     android:id="@+id/kayitTitleEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Başlık" />
+                    android:hint="@string/baslik_string" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top|start"
-                    android:hint="Tanım"
+                    android:hint="@string/tanim_string"
                     android:inputType="text|textMultiLine"
                     android:minLines="3" />
             </com.google.android.material.textfield.TextInputLayout>

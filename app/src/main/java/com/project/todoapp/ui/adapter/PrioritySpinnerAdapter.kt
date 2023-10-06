@@ -15,6 +15,7 @@ import com.project.todoapp.databinding.PrioritySpinnerItemBinding
 class PrioritySpinnerAdapter(
     private var priorityList: List<Priority>,
     private var mContext: Context,
+    private var isEn:Boolean
 ) :
     BaseAdapter(), Filterable {
     override fun getCount(): Int {
@@ -22,7 +23,7 @@ class PrioritySpinnerAdapter(
     }
 
     override fun getItem(position: Int): Any {
-        return priorityList[position].tr()
+        return if (isEn)  priorityList[position].en() else priorityList[position].tr()
     }
 
     override fun getItemId(position: Int): Long {
@@ -36,7 +37,7 @@ class PrioritySpinnerAdapter(
         val binding =
             PrioritySpinnerItemBinding.inflate(LayoutInflater.from(mContext), parent, false)
         binding.colorCircle.background = setBackground(currentPriority)
-        binding.priorityTextView.text = currentPriority.tr()
+        binding.priorityTextView.text = if (isEn)  currentPriority.en() else currentPriority.tr()
         return binding.root
     }
 

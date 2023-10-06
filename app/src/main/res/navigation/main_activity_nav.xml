@@ -26,10 +26,17 @@
         <argument
             android:name="Todo"
             app:argType="com.project.todoapp.data.entity.Todo" />
+        <argument
+            android:name="language"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/kayitFragment"
         android:name="com.project.todoapp.ui.fragments.KayitFragment"
         android:label="fragment_kayit"
-        tools:layout="@layout/fragment_kayit" />
+        tools:layout="@layout/fragment_kayit" >
+        <argument
+            android:name="language"
+            app:argType="boolean" />
+    </fragment>
 </navigation>
